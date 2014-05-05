@@ -50,7 +50,7 @@ public class ReservoirStorage {
 			try {
 				String[] split = inputLine.split(",");
 				if (split.length == 3) {
-					SimpleDateFormat format = new SimpleDateFormat("yyyymmdd");
+					SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 					Date date;
 					date = format.parse(split[0]);
 					map.put(date.getTime(), Long.parseLong(split[2]));
