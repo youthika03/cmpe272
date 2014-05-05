@@ -15,11 +15,14 @@ import com.sjsu.cmpe272.entity.Reservoir;
 
 @Component
 public class ReservoirFetcher {
-	
+
 	@Autowired
 	ReservoirStorage reservoirStorage;
-	
-	
+	@Autowired
+	ReservoirOutflow reservoirOutflow;
+	@Autowired
+	ReservoirInflow reservoirInflow;
+
 	private final String USER_AGENT = "Mozilla/5.0";
 	private static String value;
 
@@ -63,11 +66,22 @@ public class ReservoirFetcher {
 
 		for (int i = 0; i < stationIds.length; i++) {
 			Reservoir reservoir = sendRequest(stationIds[i].trim());
-			Map<Long, Long> storage = reservoirStorage.getReservoirStorage(stationIds[i].trim());
+
+			Map<Long, Long> storage = reservoirStorage
+					.getReservoirStorage(stationIds[i].trim());
 			reservoir.setStorageData(storage);
+
+			Map<Long, Long> outflow = reservoirOutflow
+					.getOutflowData(stationIds[i].trim());
+			reservoir.setOutflowData(outflow);
+
+			Map<Long, Long> inflow = reservoirInflow
+					.getInflowData(stationIds[i].trim());
+			reservoir.setInflowData(inflow);
+
 			reservoirList.add(reservoir);
 		}
-		
+
 		return reservoirList;
 	}
 
@@ -88,7 +102,7 @@ public class ReservoirFetcher {
 		String inputLine;
 		StringBuffer response = new StringBuffer();
 
-		// New changes for string seach start here.
+		// New changes for string search start here.
 		while ((inputLine = in.readLine()) != null) {
 			if (inputLine.endsWith("<DIV class=content_left_column>")) {
 				List<String> s = new ArrayList<String>();
@@ -99,7 +113,7 @@ public class ReservoirFetcher {
 			}
 			// response.append(inputLine).append("\n");
 		}
-		// New changes for string seach end here.
+		// New changes for string search end here.
 
 		in.close();
 		value = response.toString();
@@ -114,8 +128,7 @@ public class ReservoirFetcher {
 
 		for (String singleLine : s) {
 
-			String stationName = getStringInBetween(singleLine, "<h2>",
-					"</h2>");
+			String stationName = getStringInBetween(singleLine, "<h2>", "</h2>");
 			if (stationName != null) {
 				r.setStationName(stationName);
 			}

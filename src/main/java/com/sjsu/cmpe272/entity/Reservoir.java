@@ -15,6 +15,8 @@ public class Reservoir {
 	private Object riverBasin;
 	private String elevation;
 	private Map<Long, Long> storageData;
+	private Map<Long,Long> outflowData;
+	private Map<Long,Long> inflowData;
 	
 	public String getStationId() {
 		return stationId;
@@ -110,5 +112,21 @@ public class Reservoir {
 
 	public void setStorageData(Map<Long, Long> storageData) {
 		this.storageData = storageData;
+	}
+
+	public Map<Long,Long> getOutflowData(String stationName) {
+		return outflowData;
+	}
+
+	public void setOutflowData(Map<Long,Long> outflowData) {
+		this.outflowData = outflowData;
+	}
+
+	public Map<Long,Long> getInflowData(String stationName) {
+		return inflowData;
+	}
+
+	public void setInflowData(Map<Long,Long> inflowData) {
+		this.inflowData = inflowData;
 	}
 }

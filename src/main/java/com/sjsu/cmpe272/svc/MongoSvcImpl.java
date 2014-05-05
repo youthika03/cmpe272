@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
+import com.mongodb.BasicDBObject;
 
 import com.sjsu.cmpe272.entity.Reservoir;
 
@@ -22,7 +23,7 @@ public class MongoSvcImpl implements MongoSvc {
 
 	@Override
 	public Reservoir findReservoirByName(String name) {
-		
+
 		Criteria criteria = new Criteria("name");
 		criteria.in(name);
 		Query query = new Query(criteria);
@@ -30,5 +31,4 @@ public class MongoSvcImpl implements MongoSvc {
 		return reservoir;
 	}
 
-	
 }

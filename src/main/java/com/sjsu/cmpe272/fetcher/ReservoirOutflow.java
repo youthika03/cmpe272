@@ -14,25 +14,25 @@ import java.util.TreeMap;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ReservoirStorage {
+public class ReservoirOutflow {
 	private final String USER_AGENT = "Mozilla/5.0";
 	private static String value;
 
 	/*
 	 * public static void main(String args[]) throws IOException {
-	 * ReservoirStorage objReservoir = new ReservoirStorage(); Map<Long, Long>
-	 * reservoirStorage = objReservoir.getReservoirStorage("SHA");
+	 * ReservoirOutflow objOutflow = new ReservoirOutflow(); Map<Long, Long>
+	 * reservoirOutflow = objOutflow.getOutflowData("SHA");
 	 * 
 	 * }
 	 */
 
 	// Http GET Request.
-	public Map<Long, Long> getReservoirStorage(String station)
-			throws IOException {
+
+	public Map<Long, Long> getOutflowData(String station) throws IOException {
 		String inputLine;
 		String url = "http://cdec.water.ca.gov/cgi-progs/queryCSV?station_id="
 				+ station
-				+ "&sensor_num=15&dur_code=D&start_date=2010-01-01&end_date=2014-04-25&data_wish=View+CSV+Data";
+				+ "&sensor_num=23&dur_code=D&start_date=2010-01-01&end_date=2014-04-25&data_wish=View+CSV+Data";
 
 		URL obj = new URL(url);
 		HttpURLConnection connect = (HttpURLConnection) obj.openConnection();
@@ -63,18 +63,18 @@ public class ReservoirStorage {
 			}
 
 		}
-		// New changes for string seach end here.
+		// New changes for string search end here.
 
 		in.close();
 		value = response.toString();
 
-		// System.out.println("Here is the output: " +value);
-		// //response.toString()
 		return map;
+
 	}
 
 	public String getResponse() {
 		return value;
+
 	}
 
 }

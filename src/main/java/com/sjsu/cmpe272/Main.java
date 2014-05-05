@@ -35,7 +35,7 @@ public class Main implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		List<Reservoir> allReservoirs = reservoirFetcher.getAllReservoirs();
 		mongoSvc.insert(allReservoirs);
-		Reservoir r = mongoSvc.findReservoirByName("SHASTA DAM (USBR)");
-		System.out.println(r);
+		//Reservoir r = mongoSvc.findReservoirByName("SHASTA DAM (USBR)");
+		//System.out.println(r);
 	}
 }
