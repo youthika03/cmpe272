@@ -7,9 +7,8 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
-import com.mongodb.BasicDBObject;
 
-import com.sjsu.cmpe272.entity.Reservoir;
+import com.sjsu.cmpe272.entity.CalReservoir;
 
 @Component
 public class MongoSvcImpl implements MongoSvc {
@@ -17,17 +16,17 @@ public class MongoSvcImpl implements MongoSvc {
 	MongoOperations mongoOps;
 
 	@Override
-	public void insert(List<Reservoir> documents) {
+	public void insert(List<CalReservoir> documents) {
 		mongoOps.insertAll(documents);
 	}
 
 	@Override
-	public Reservoir findReservoirByName(String name) {
+	public CalReservoir findReservoirByName(String name) {
 
 		Criteria criteria = new Criteria("name");
 		criteria.in(name);
 		Query query = new Query(criteria);
-		Reservoir reservoir = mongoOps.findOne(query, Reservoir.class);
+		CalReservoir reservoir = mongoOps.findOne(query, CalReservoir.class);
 		return reservoir;
 	}
 

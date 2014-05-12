@@ -11,7 +11,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sjsu.cmpe272.entity.Reservoir;
+import com.sjsu.cmpe272.entity.CalReservoir;
 
 @Component
 public class ReservoirFetcher {
@@ -60,12 +60,12 @@ public class ReservoirFetcher {
 			"	USL	", "	VAR	", "	VIL	", "	VLP	", "	WHI	", "	WHR	", "	WRS	",
 			"	WSN	" };
 
-	public List<Reservoir> getAllReservoirs() throws Exception {
+	public List<CalReservoir> getAllReservoirs() throws Exception {
 		System.out.println("Testing1: Sending Http GET Request.");
-		List<Reservoir> reservoirList = new ArrayList<Reservoir>();
+		List<CalReservoir> reservoirList = new ArrayList<CalReservoir>();
 
 		for (int i = 0; i < stationIds.length; i++) {
-			Reservoir reservoir = sendRequest(stationIds[i].trim());
+			CalReservoir reservoir = sendRequest(stationIds[i].trim());
 
 			Map<Long, Long> storage = reservoirStorage
 					.getReservoirStorage(stationIds[i].trim());
@@ -86,7 +86,7 @@ public class ReservoirFetcher {
 	}
 
 	// Http GET Request.
-	public Reservoir sendRequest(String allStations) throws Exception {
+	public CalReservoir sendRequest(String allStations) throws Exception {
 
 		String url = "http://cdec.water.ca.gov/cgi-progs/staMeta?station_id="
 				+ allStations;
@@ -123,8 +123,8 @@ public class ReservoirFetcher {
 		return null;
 	}
 
-	private Reservoir parseTable(List<String> s) {
-		Reservoir r = new Reservoir();
+	private CalReservoir parseTable(List<String> s) {
+		CalReservoir r = new CalReservoir();
 
 		for (String singleLine : s) {
 

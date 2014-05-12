@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -18,13 +17,11 @@ public class ReservoirStorage {
 	private final String USER_AGENT = "Mozilla/5.0";
 	private static String value;
 
-	/*
-	 * public static void main(String args[]) throws IOException {
-	 * ReservoirStorage objReservoir = new ReservoirStorage(); Map<Long, Long>
-	 * reservoirStorage = objReservoir.getReservoirStorage("SHA");
-	 * 
-	 * }
-	 */
+	// public ReservoirStorage() throws IOException {
+	// ReservoirStorage objReservoir = new ReservoirStorage();
+	// Map<Long, Long> reservoirStorage =
+	// objReservoir.getReservoirStorage("SHA");
+	// }
 
 	// Http GET Request.
 	public Map<Long, Long> getReservoirStorage(String station)
@@ -63,18 +60,18 @@ public class ReservoirStorage {
 			}
 
 		}
-		// New changes for string seach end here.
+		// New changes for string search end here.
 
 		in.close();
 		value = response.toString();
 
-		// System.out.println("Here is the output: " +value);
-		// //response.toString()
 		return map;
+
 	}
 
 	public String getResponse() {
 		return value;
+
 	}
 
 }
